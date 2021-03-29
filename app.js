@@ -35,19 +35,20 @@ var createNewTaskElement = function (taskString) {
   listItem.className = "task-list";
 
   label.innerText = taskString;
-  label.className = 'task';
+  label.className = 'task__label';
 
   //Each elements, needs appending
   checkBox.type = "checkbox";
-  checkBox.className = "task-check";
+  checkBox.className = "task__check";
   editInput.type = "text";
-  editInput.className = "task task-edit";
+  editInput.className = "task__input";
 
   editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
-  editButton.className = "edit";
+  editButton.className = "task__edit";
 
-  deleteButton.className = "delete";
+  deleteButton.className = "task__delete";
   deleteButtonImg.src = './remove.svg';
+  deleteButtonImg.className = "task__icon";
   deleteButton.appendChild(deleteButtonImg);
 
 
@@ -85,9 +86,9 @@ var editTask = function () {
 
   var listItem = this.parentNode;
 
-  var editInput = listItem.querySelector('.task-edit');
-  var label = listItem.querySelector("label");
-  var editBtn = listItem.querySelector(".edit");
+  var editInput = listItem.querySelector('.task__input');
+  var label = listItem.querySelector(".task__label");
+  var editBtn = listItem.querySelector(".task__edit");
   var containsClass = listItem.classList.contains("edit-mode");
   //If class of the parent is .edit-mode
   if (containsClass) {
@@ -158,17 +159,20 @@ addButton.addEventListener("click", ajaxRequest);
 var bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   console.log("bind list item events");
   //select ListItems children
-  var checkBox = taskListItem.querySelector(".task-check");
-  var editButton = taskListItem.querySelector("button.edit");
-  var deleteButton = taskListItem.querySelector("button.delete");
+  var checkBox = taskListItem.querySelector(".task__check");
+  var editButton = taskListItem.querySelector(".task__edit");
+  var deleteButton = taskListItem.querySelector(".task__delete");
 
 
   //Bind editTask to edit button.
-  editButton.onclick = editTask;
+  if(editButton)
+    editButton.onclick = editTask;
   //Bind deleteTask to delete button.
-  deleteButton.onclick = deleteTask;
+  if(deleteButton)
+    deleteButton.onclick = deleteTask;
   //Bind taskCompleted to checkBoxEventHandler.
-  checkBox.onchange = checkBoxEventHandler;
+  if(checkBox)
+    checkBox.onchange = checkBoxEventHandler;
 }
 
 //cycle over incompleteTaskHolder ul list items
