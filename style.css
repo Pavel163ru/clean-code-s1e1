@@ -53,11 +53,7 @@ button:hover {
   width: 500px;
   margin: 0 auto 0;
 }
-.task__label {
-  width: 56%;
-  display: inline-block;
-  flex-grow: 1;
-}
+.task__label, 
 .task__input {
   width: 56%;
   display: inline-block;
@@ -99,6 +95,7 @@ button:hover {
 }
 .new-task__input {
   width: 318px;
+  flex-grow: 1;
 }
 .new-task__item{
   display: flex;
